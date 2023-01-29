@@ -1,0 +1,50 @@
+.transform-container{
+  width: 103px;
+  height: 103px;
+  overflow: hidden;
+}
+
+.transform-container > .animation-img{
+  width: 100%;
+  height: auto;
+}
+
+.multitransform-container{
+  width: 66px;
+  height: 88px;
+  overflow: hidden;
+  background-color: #000;
+}
+
+
+.background-container,
+.animation-background-container{
+  background: url("./statics/management-icon.png") no-repeat;
+  width: 103px;
+  height: 103px;
+  background-position: 0 0;
+  background-size: 100%;
+}
+
+.animation-background-container{
+  animation: stepsAnimation 24s steps(23);
+  animation-play-state: paused;
+  animation-delay: 0s;
+}
+@keyframes stepsAnimation {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 100%;
+  }
+}
+
+.multibackground-container{
+  background: url("./statics/apple-lock-icon.png") no-repeat;
+  width: 66px;
+  height: 88px;
+  background-color: #000;
+  background-position: 0 0;
+  /* background-size: 100%; */
+}
