@@ -1,5 +1,6 @@
 # frame-animation
-controllable frame animation.
+controllable frame animation./
+This package is not published to npm.
 
 # Usage
 ## Single-line
