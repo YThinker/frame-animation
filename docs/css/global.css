@@ -1,0 +1,39 @@
+@import url("./normalize.css");
+
+body{
+  font-size: 12px;
+}
+
+.button {
+  padding: 12px 26px;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 2px 2px 6px #ddd;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.button:hover{
+  box-shadow: 2px 2px 6px #ddd,4px 4px 12px #ddd;
+}
+.button.primary{
+  background-color: hsl(216, 84%, 52%);
+}
+.button.primary:active{
+  background-color: hsl(216, 84%, 48%);
+}
+.button.success{
+  background-color: hsl(131, 55%, 40%);
+}
+.button.success:active{
+  background-color: hsl(131, 55%, 36%);
+}
+.button.default{
+  background-color: hsl(0, 0%, 93%);
+  color: #5d5d66;
+}
+.button.default:active{
+  background-color: hsl(0, 0%, 89%);
+}

@@ -1,0 +1,109 @@
+@import url("./global.css");
+
+.header{
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  padding: 12px 24px;
+  box-sizing: border-box;
+}
+.title {
+  font-size: 18px;
+  margin: 0;
+}
+.github-link{
+  font-size: 0;
+}
+
+.main{
+  position: relative;
+  top: 30%;
+  box-sizing: border-box;
+}
+
+.demo-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  box-sizing: border-box;
+}
+
+.demo{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+  box-shadow: 4px 4px 6px #ddd;
+  overflow: hidden;
+  transform: rotateX(0deg) translateY(0);
+  transition: transform 0.8s;
+}
+.demo:hover{
+  transform: rotateX(30deg) translateY(-10px);
+}
+
+.demo > .demo-viewer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 120px;
+  background-color: #ddd;
+}
+
+.demo > .name{
+  color: #666;
+  font-size: 12px;
+  margin: 1em 0;
+}
+
+.transform-container{
+  width: 125px;
+  height: 63px;
+  overflow: hidden;
+}
+.transform-container > .animation-img{
+  width: auto;
+  height: 100%;
+}
+
+.button-group{
+  margin-top: 80px;
+  text-align: center;
+}
+.button{
+  margin: 0 20px;
+}
+
+
+.background-container,
+.animation-background-container{
+  background: url("../statics/management-icon.png") no-repeat;
+  width: 103px;
+  height: 103px;
+  background-position: 0 0;
+  background-size: 100%;
+}
+.animation-background-container{
+  animation: stepsAnimation 0.6s steps(23);
+  animation-iteration-count: infinite;
+}
+@keyframes stepsAnimation {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 100%;
+  }
+}
+
+.multibackground-container{
+  background: url("../statics/apple-lock-icon.png") no-repeat;
+  width: 66px;
+  height: 88px;
+  background-position: 0 0;
+}

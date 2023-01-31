@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FrameByFrame Animation Example</title>
+
+  <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+  <header class="header">
+    <h1 class="title">Frame by frame animation demo</h1>
+    <a class="github-link" href="https://github.com/YThinker/frame-animation" aria-label="Go to github">
+      <img src="./statics/github-icon.svg" alt="github">
+    </a>
+  </header>
+  <main class="main">
+    <div class="demo-container">
+      <section class="demo">
+        <div class="demo-viewer">
+          <div id="background" class="background-container"></div>
+        </div>
+        <p class="name">single-line background-position</p>
+      </section>
+      <section class="demo">
+        <div class="demo-viewer">
+          <div class="transform-container"><img id="transform" src="./statics/bear-run.png" class="animation-img"></div>
+        </div>
+        <p class="name">single-line transform</p>
+      </section>
+      <section class="demo">
+        <div class="demo-viewer">
+          <div id="multibackground" class="multibackground-container"></div>
+        </div>
+        <p class="name">multiline background-position</p>
+      </section>
+      <section class="demo">
+        <div class="demo-viewer">
+          <div class="animation-background-container"></div>
+        </div>
+        <p class="name">use css steps</p>
+      </section>
+    </div>
+    <div class="button-group">
+      <a class="button default" type="button" href="try-it.html">Try It</a>
+      <a class="button primary" type="button" href="keyframes-generator.html" target="_blank">Multiline Keyframes Generator</a>
+    </div>
+  </main>
+</body>
+
+<script src="/package/dist/index.js"></script>
+<script type="text/javascript" src="./js/index.js"></script>
+</html>

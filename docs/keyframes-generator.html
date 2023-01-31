@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multiline Keyframes Generator</title>
+
+  <link rel="stylesheet" href="./css/keyframes-generator.css">
+</head>
+<body>
+  <header class="header">
+    <h1 class="title">Multiline Keyframes Generator</h1>
+  </header>
+  <main class="main">
+    <form id="form" class="form">
+      <label class="form-item">
+        <span class="form-item-name">Total Frame Count: </span>
+        <input class="number-input" id="totalFrame" value="24" type="text">
+      </label>
+      <label class="form-item">
+        <span class="form-item-name">Columns Number: </span>
+        <input class="number-input" id="columnsNumber" value="6" type="text">
+      </label>
+      <label class="form-item">
+        <span class="form-item-name">Type: </span>
+        <select id="type" class="select">
+          <option value="transform">Transform</option>
+          <option value="background-position">Background Position</option>
+          <option value="top-left">Top & Left</option>
+        </select>
+      </label>
+    </form>
+    <div class="button-group">
+      <button class="button primary submit" type="button" id="submit">Generate</button>
+    </div>
+    <div class="textarea-container">
+      <textarea class="textarea" id="result" readonly></textarea>
+    </div>
+  </main>
+</body>
+
+<script src="./js/keyframes-generator.js"></script>
+</html>
