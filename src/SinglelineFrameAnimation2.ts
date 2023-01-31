@@ -30,6 +30,7 @@ interface IConfig {
 }
 
 /**
+ * @deprecated
  * 另一种尝试：使用累计动画时间百分比确定执行到了哪一步
  * fillMode未实现
  * continue interrupt未实现

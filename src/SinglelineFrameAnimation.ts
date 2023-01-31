@@ -1,9 +1,9 @@
 import raf from 'raf';
 import { isHTMLElement, isRenderImageElement, IRenderImageElement } from './utils';
 
-type IFillMode = 'none'|'forwards'|'backwards'|'both'
-type OriType = 'ltr'|'rtl'
-type IDrawType = 'background'|'transform'|'imgSrc'
+export type IFillMode = 'none'|'forwards'|'backwards'|'both'
+export type OriType = 'ltr'|'rtl'
+export type IDrawType = 'background'|'transform'|'imgSrc'
 
 /**
  * @param {number} totalFrameNumber 总帧数（序列图总数）
@@ -16,7 +16,7 @@ type IDrawType = 'background'|'transform'|'imgSrc'
  * @param {boolean} prefetch 是否预加载 imgSrcList
  * @param {"normal"|"alternate"} motionDirection 是否应该轮流反向播放动画
  */
-interface IConfig {
+export interface IConfig {
   totalFrameNumber: number;
   /** @defaultValue "vertical" */
   imageDirection?: 'vertical' | 'horizontal';
@@ -43,7 +43,7 @@ class SinglelineFrameAnimation {
     motionDirection: 'normal'
   };
   public element;
-  private drawType?: IDrawType;
+  protected drawType?: IDrawType;
   /** 当前在第几帧 */
   public currentFrame = 0;
   /** 上一次绘制时间 */
@@ -84,7 +84,7 @@ class SinglelineFrameAnimation {
   }
 
   /** 动画执行预设多久 */
-  private _calcFrameInterval () {
+  protected _calcFrameInterval () {
     /** 一帧时间间隔 */
     return 1000 / (typeof this.config.fps === 'number' ? this.config.fps : 60)
   }
@@ -93,7 +93,7 @@ class SinglelineFrameAnimation {
    * 一帧跨越的百分比
    * backgroundPosition与transfrom不太一致，特殊处理。
    **/
-  private _calcOneFramePercent () {
+  protected _calcOneFramePercent () {
     return 1 / (this.config.totalFrameNumber - (this.drawType === 'transform' ? 0 : 1)) * 100;
   }
 
@@ -101,7 +101,7 @@ class SinglelineFrameAnimation {
    * 计算当前在第几张画面
    * 超过totalFrameNumber时，则继续从0开始开始计算。
    **/
-  private _calcCurrentFrame (type: OriType) {
+  protected _calcCurrentFrame (type: OriType) {
     let tolerenceCurrentFrame = Math.abs(this.currentFrame) % this.config.totalFrameNumber;
     if(this.currentFrame < 0 && (this.config.fillMode === 'backwards' || this.config.fillMode === 'both')) {
       tolerenceCurrentFrame = 0;
@@ -113,7 +113,7 @@ class SinglelineFrameAnimation {
   }
 
   /** 移动backgroundPosition跳到下一帧 */
-  private _drawBackground(type: OriType) {
+  protected _drawBackground(type: OriType) {
     if (!isHTMLElement(this.element)) {
       return;
     }
@@ -127,7 +127,7 @@ class SinglelineFrameAnimation {
   }
 
   /** 移动transform跳到下一帧 */
-  private _drawTransform(type: OriType) {
+  protected _drawTransform(type: OriType) {
     if (!isHTMLElement(this.element)) {
       return;
     }
@@ -141,7 +141,7 @@ class SinglelineFrameAnimation {
   }
 
   /** 更新src跳到下一帧 */
-  private _drawImageSource(type: OriType) {
+  protected _drawImageSource(type: OriType) {
     if (!isRenderImageElement(this.element)) {
       return;
     }
@@ -165,7 +165,7 @@ class SinglelineFrameAnimation {
    * 绘制
    * @param {boolean} once 下一帧动画执行完成后终止（特殊用途）
    **/
-  private draw (type: OriType = 'ltr', startTimestamp: DOMHighResTimeStamp, once?: boolean) {
+  protected draw (type: OriType = 'ltr', startTimestamp: DOMHighResTimeStamp, once?: boolean) {
     const cacheRafSymbol = this.rafSymbol;
     /** 获取当前时间与lastStartTimestamp对比 超过一帧间隔则绘制下一帧 */
     if (this.lastStartTimestamp === 0 || startTimestamp - this.lastStartTimestamp >= this._calcFrameInterval()) {
@@ -209,7 +209,7 @@ class SinglelineFrameAnimation {
    * 设置定时器
    * 当传入的cacheRafSymbol存在且和当前rafSymbol不同时，说明用户已经手动设置了一次新的定时器，不再继续设置定时器。
    */
-  private _setRaf(type: OriType, cacheRafSymbol?: number|null, once?: boolean) {
+  protected _setRaf(type: OriType, cacheRafSymbol?: number|null, once?: boolean) {
     if(cacheRafSymbol && this.rafSymbol !== cacheRafSymbol) {
       return;
     }
