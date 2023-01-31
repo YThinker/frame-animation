@@ -5,6 +5,7 @@ body{
 }
 
 .button {
+  display: inline-block;
   padding: 12px 26px;
   border: none;
   border-radius: 8px;

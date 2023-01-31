@@ -198,8 +198,8 @@ button,
 [type="button"],
 [type="reset"],
 [type="submit"] {
-  -webkit-appearance: auto;
-  appearance: auto;
+  -webkit-appearance: button;
+  appearance: button;
 }
 
 /**
