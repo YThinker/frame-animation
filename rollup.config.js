@@ -26,6 +26,10 @@ module.exports.default = [{
         name: packageName,
         dir: umdOutDir,
         format: 'umd'
+    }, {
+        name: packageName,
+        dir: 'docs/package',
+        format: 'umd'
     }],
     plugins: [
         // externals(),

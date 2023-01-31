@@ -1,6 +1,7 @@
 # frame-animation
-controllable frame animation./
-This package is not published to npm.
+controllable frame animation.\
+This package is not published to npm.\
+Homepage: https://ythinker.github.io/frame-animation/
 
 # Usage
 ## Single-line
