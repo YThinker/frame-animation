@@ -30,6 +30,9 @@ function generateFrame (type, i, totalFrameCount, columnsNumber, columnPercent, 
     return `background-position: ${currentColumn * columnPercent}% ${currentRow * rowPercent}%;`;
   } else if (type === 'transform') {
     return `transform: translate(-${currentColumn * columnPercent}%, -${currentRow * rowPercent}%)`;
+  } else if (type === 'offset') {
+    return `left: -${currentColumn * 100}%;
+    top: -${currentRow * 100}%;`;
   }
 }
 function keyframesGenerator (totalFrameCount, columnsNumber, type) {
