@@ -49,10 +49,10 @@ class SinglelineFrameAnimation {
   /** 上一次绘制时间 */
   public lastStartTimestamp = 0;
   /** hooks */
-  public onstart?: (self?: SinglelineFrameAnimation) => void;
-  public onprefetch?: (result?: boolean[], self?: SinglelineFrameAnimation) => void;
-  public onupdate?: (startTimestamp?: DOMHighResTimeStamp, self?: SinglelineFrameAnimation) => void;
-  public oncomplete?: (startTimestamp?: DOMHighResTimeStamp, self?: SinglelineFrameAnimation) => void;
+  public onstart?: (self: SinglelineFrameAnimation) => void;
+  public onprefetch?: (result: boolean[], self: SinglelineFrameAnimation) => void;
+  public onupdate?: (startTimestamp: DOMHighResTimeStamp, self: SinglelineFrameAnimation) => void;
+  public oncomplete?: (startTimestamp: DOMHighResTimeStamp, self: SinglelineFrameAnimation) => void;
   /** side effect */
   public rafSymbol: number|null = null;
 
