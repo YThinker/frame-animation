@@ -42,9 +42,9 @@ class MultilineFrameAnimation {
   /** 上一次绘制时间 */
   protected lastStartTimestamp = 0;
   /** hooks */
-  public onstart?: (self: MultilineFrameAnimation) => void;
-  public onupdate?: (startTimestamp: DOMHighResTimeStamp, self: MultilineFrameAnimation) => void;
-  public oncomplete?: (startTimestamp: DOMHighResTimeStamp, self: MultilineFrameAnimation) => void;
+  public onstart?: (self?: MultilineFrameAnimation) => void;
+  public onupdate?: (startTimestamp?: DOMHighResTimeStamp, self?: MultilineFrameAnimation) => void;
+  public oncomplete?: (startTimestamp?: DOMHighResTimeStamp, self?: MultilineFrameAnimation) => void;
   /** side effect */
   protected rafSymbol: number|null = null;
 
