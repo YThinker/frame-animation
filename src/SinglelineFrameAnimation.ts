@@ -49,16 +49,16 @@ class SinglelineFrameAnimation {
   /** 上一次绘制时间 */
   public lastStartTimestamp = 0;
   /** hooks */
-  public onstart = () => void 0;
-  public onprefetch = (result: boolean[]) => void 0;
-  public onupdate = (startTimestamp: DOMHighResTimeStamp) => void 0;
-  public oncomplete = (startTimestamp: DOMHighResTimeStamp) => void 0;
+  public onstart?: (self: SinglelineFrameAnimation) => void;
+  public onprefetch?: (result: boolean[], self: SinglelineFrameAnimation) => void;
+  public onupdate?: (startTimestamp: DOMHighResTimeStamp, self: SinglelineFrameAnimation) => void;
+  public oncomplete?: (startTimestamp: DOMHighResTimeStamp, self: SinglelineFrameAnimation) => void;
   /** side effect */
   public rafSymbol: number|null = null;
 
   constructor(ele: HTMLElement|null|undefined, config?: IConfig, drawType?: IDrawType) {
     if(drawType === 'transform' && !isHTMLElement(ele)) {
-      console.warn("Element should be <picture> or <img> when draw type is transform");
+      console.warn(`Please Check your element parameter, which should be a <HTMLElement>`);
     }
     if(drawType === 'imgSrc' && !isRenderImageElement(ele)) {
       console.warn("Element should be <img> when draw type is transform");
@@ -79,7 +79,7 @@ class SinglelineFrameAnimation {
         img.onabort = () => reject(false);
         img.src = src;
       })))
-      this.onprefetch(result)
+      this.onprefetch?.(result, this)
     }
   }
 
@@ -172,14 +172,14 @@ class SinglelineFrameAnimation {
       this.lastStartTimestamp = startTimestamp;
 
       this.renderFrame(this.currentFrame, type);
-      this.onupdate(startTimestamp)
+      this.onupdate?.(startTimestamp, this)
       if(once) {
         return;
       }
 
       // 判断是否终止绘制，或已绘制到最后一张
       if (this.currentFrame + (this.config.infinite ? 0 : 1) === this.config.totalFrameNumber) {
-        this.oncomplete(startTimestamp);
+        this.oncomplete?.(startTimestamp, this);
         // 交替播放
         if(this.config.motionDirection === 'alternate') {
           this.currentFrame = 0;
@@ -226,7 +226,7 @@ class SinglelineFrameAnimation {
     typeof this.rafSymbol === 'number' && raf.cancel(this.rafSymbol);
     // 开始绘制
     this._setRaf(type ?? 'ltr');
-    this.onstart();
+    this.onstart?.(this);
   }
 
   /** 从中断位置继续 */
