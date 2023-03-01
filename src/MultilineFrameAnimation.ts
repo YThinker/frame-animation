@@ -45,6 +45,7 @@ class MultilineFrameAnimation {
   public onstart?: (self: MultilineFrameAnimation) => void;
   public onupdate?: (startTimestamp: DOMHighResTimeStamp, self: MultilineFrameAnimation) => void;
   public oncomplete?: (startTimestamp: DOMHighResTimeStamp, self: MultilineFrameAnimation) => void;
+  public oncancel?: (self: MultilineFrameAnimation) => void;
   /** side effect */
   protected rafSymbol: number|null = null;
 
@@ -217,6 +218,15 @@ class MultilineFrameAnimation {
     this.rafSymbol = null;
     this.currentFrame = 0;
     this.lastStartTimestamp = 0;
+    /** clear inject style */
+    if (this.element) {
+      if(this.drawType === 'transform') {
+        this.element.style.transform = '';
+      } else {
+        this.element.style.backgroundPosition = '';
+      }
+    }
+    this.oncancel?.(this);
   }
 }
 

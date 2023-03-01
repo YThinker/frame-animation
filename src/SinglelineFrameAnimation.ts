@@ -53,6 +53,7 @@ class SinglelineFrameAnimation {
   public onprefetch?: (result: boolean[], self: SinglelineFrameAnimation) => void;
   public onupdate?: (startTimestamp: DOMHighResTimeStamp, self: SinglelineFrameAnimation) => void;
   public oncomplete?: (startTimestamp: DOMHighResTimeStamp, self: SinglelineFrameAnimation) => void;
+  public oncancel?: (self: SinglelineFrameAnimation) => void;
   /** side effect */
   public rafSymbol: number|null = null;
 
@@ -249,6 +250,17 @@ class SinglelineFrameAnimation {
     this.rafSymbol = null;
     this.currentFrame = 0;
     this.lastStartTimestamp = 0;
+    /** clear inject style */
+    if (this.element) {
+      if (this.drawType === 'transform') {
+        this.element.style.transform = '';
+      } else if (this.drawType === 'imgSrc') {
+        (this.element as IRenderImageElement).src = this.config.imgSrcList[this.currentFrame];
+      } else {
+        this.element.style.backgroundPosition = '';
+      }
+    }
+    this.oncancel?.(this);
   }
 }
 
