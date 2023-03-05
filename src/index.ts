@@ -7,3 +7,4 @@ export {
   MultilineFrameAnimation,
   SinglelineFrameAnimation2,
 }
+export * from './utils/types';
