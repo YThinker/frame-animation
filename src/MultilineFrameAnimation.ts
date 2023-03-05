@@ -29,7 +29,7 @@ class MultilineFrameAnimation extends Base {
 
   constructor(ele: HTMLElement|null|undefined, config?: MultilineConfig, drawType?: MultilineDrawType) {
     super(ele);
-    if(drawType === 'transform' && !isHTMLElement(ele)) {
+    if(!isHTMLElement(ele)) {
       console.warn(`Please Check your element parameter, which should be a <HTMLElement>`);
     }
     this.config = {...this.config, ...config};
@@ -92,11 +92,23 @@ class MultilineFrameAnimation extends Base {
     this.element!.style.transform = `translate(-${currentColumn * columnPercent}%, -${currentRow * rowPercent}%)`;
   }
 
+  /** 移动offset跳到下一帧 */
+  protected _drawOffset(type: OriType) {
+    if (!isHTMLElement(this.element)) {
+      return;
+    }
+    const { currentRow, currentColumn } = this._calcCurrentFrame(type);
+    this.element!.style.top = `-${currentRow * 100}%`;
+    this.element!.style.left = `-${currentColumn * 100}%`;
+  }
+
   renderFrame(currentFrame: number, type: OriType) {
     /** 单独调用时，可跳跃至某一帧 */
     this.currentFrame = currentFrame;
     if(this.drawType === 'transform') {
       this._drawTransform(type);
+    } if(this.drawType === 'offset') {
+      this._drawOffset(type);
     } else {
       this._drawBackground(type);
     }
@@ -106,6 +118,9 @@ class MultilineFrameAnimation extends Base {
     if (this.element) {
       if(this.drawType === 'transform') {
         this.element.style.transform = '';
+      } else if(this.drawType === 'offset') {
+        this.element.style.top = '';
+        this.element.style.left = '';
       } else {
         this.element.style.backgroundPosition = '';
       }

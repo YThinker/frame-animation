@@ -52,6 +52,9 @@ abstract class Base {
   /** 移动transform跳到下一帧 */
   protected abstract _drawTransform(type: OriType): void;
 
+  /** 移动offset跳到下一帧 */
+  protected abstract _drawOffset(type: OriType): void;
+
   abstract renderFrame(currentFrame: number, type: OriType): void;
 
   /**

@@ -38,7 +38,7 @@ class SinglelineFrameAnimation extends Base {
 
   constructor(ele: HTMLElement|null|undefined, config?: SinglelineConfig, drawType?: SinglelineDrawType) {
     super(ele);
-    if(drawType === 'transform' && !isHTMLElement(ele)) {
+    if(!isHTMLElement(ele)) {
       console.warn(`Please Check your element parameter, which should be a <HTMLElement>`);
     }
     if(drawType === 'imgSrc' && !isRenderImageElement(ele)) {
@@ -114,6 +114,19 @@ class SinglelineFrameAnimation extends Base {
     }
   }
 
+  /** 移动transform跳到下一帧 */
+  protected _drawOffset(type: OriType) {
+    if (!isHTMLElement(this.element)) {
+      return;
+    }
+    const current = this._calcCurrentFrame(type);
+    if (this.config.imageDirection === 'horizontal') {
+      this.element!.style.left = `-${current * 100}%`;
+    } else {
+      this.element!.style.top = `-${current * 100}%`;
+    }
+  }
+
   /** 更新src跳到下一帧 */
   protected _drawImageSource(type: OriType) {
     if (!isRenderImageElement(this.element)) {
@@ -128,6 +141,8 @@ class SinglelineFrameAnimation extends Base {
     this.currentFrame = currentFrame;
     if(this.drawType === 'transform') {
       this._drawTransform(type);
+    } if(this.drawType === 'offset') {
+      this._drawOffset(type);
     } else if(this.drawType === 'imgSrc') {
       this._drawImageSource(type);
     } else {
@@ -139,6 +154,9 @@ class SinglelineFrameAnimation extends Base {
     if (this.element) {
       if (this.drawType === 'transform') {
         this.element.style.transform = '';
+      } else if (this.drawType === 'offset') {
+        this.element.style.top = '';
+        this.element.style.left = '';
       } else if (this.drawType === 'imgSrc') {
         (this.element as IRenderImageElement).src = this.config.imgSrcList[this.currentFrame];
       } else {

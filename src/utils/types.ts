@@ -2,8 +2,8 @@ export type IFillMode = 'none'|'forwards'|'backwards'|'both'
 export type OriType = 'ltr'|'rtl'
 export type IStatus = 'termination'|'running'|'infiniteContinue'
 
-export type MultilineDrawType = 'background'|'transform'
-export type SinglelineDrawType = 'background'|'transform'|'imgSrc'
+export type MultilineDrawType = 'background'|'transform'|'offset'
+export type SinglelineDrawType = 'background'|'transform'|'offset'|'imgSrc'
 
 /**
  * @param {number} totalFrameNumber 总帧数（序列图总数）
