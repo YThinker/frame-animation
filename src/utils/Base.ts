@@ -80,7 +80,6 @@ abstract class Base {
         this.oncomplete?.(startTimestamp, this);
         // 交替播放
         if(this.config.motionDirection === 'alternate') {
-          this.currentFrame = 0;
           this.continue(true);
           return;
         }
