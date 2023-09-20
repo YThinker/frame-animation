@@ -24,10 +24,6 @@ abstract class Base {
     this.element = ele;
   }
 
-  private _getConfig () {
-    return this.config;
-  }
-
   /** 动画执行预设多久 */
   protected _calcFrameInterval () {
     /** 一帧时间间隔 */
@@ -166,6 +162,7 @@ abstract class Base {
     /** clear inject style */
     this.clearStyle();
     this.oncancel?.(this);
+    this.element = null;
   }
 }
 
